@@ -1,6 +1,6 @@
 venv/
 *.pyc
 __pycache__/
-able.egg-info/
+lictionary.egg-info/
 dist/
 build/
