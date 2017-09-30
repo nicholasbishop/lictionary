@@ -7,11 +7,8 @@ class Lictionary(collections.MutableMapping, collections.MutableSequence):
         super(Lictionary, self).__init__()
         self._items = list(args)
 
-    def as_list(self):
-        return self._items
-
-    def insert(self, index, item):
-        self._items.insert(index, item)
+    def __delitem__(self, key):
+        raise NotImplementedError()
 
     def __getitem__(self, key):
         if isinstance(key, int):
@@ -30,20 +27,11 @@ class Lictionary(collections.MutableMapping, collections.MutableSequence):
         else:
             raise NotImplementedError()
 
-    def __delitem__(self, key):
-        raise NotImplementedError()
-
-    def __len__(self):
-        return len(self._items)
-
     def __iter__(self):
         return self._items.__iter__()
 
-    def get(self, key, default=None):
-        try:
-            return self[key]
-        except (IndexError, KeyError):
-            return default
+    def __len__(self):
+        return len(self._items)
 
     def __eq__(self, other):
         if isinstance(other, Lictionary):
@@ -80,4 +68,16 @@ class Lictionary(collections.MutableMapping, collections.MutableSequence):
             return self._items != other._items
         else:
             return self._items != other
+
+    def as_list(self):
+        return self._items
+
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except (IndexError, KeyError):
+            return default
+
+    def insert(self, index, item):
+        self._items.insert(index, item)
 
