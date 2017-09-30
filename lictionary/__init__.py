@@ -44,3 +44,40 @@ class Lictionary(collections.MutableMapping, collections.MutableSequence):
             return self[key]
         except (IndexError, KeyError):
             return default
+
+    def __eq__(self, other):
+        if isinstance(other, Lictionary):
+            return self._items == other._items
+        else:
+            return self._items == other
+
+    def __ge__(self, other):
+        if isinstance(other, Lictionary):
+            return self._items >= other._items
+        else:
+            return self._items >= other
+
+    def __gt__(self, other):
+        if isinstance(other, Lictionary):
+            return self._items > other._items
+        else:
+            return self._items > other
+
+    def __le__(self, other):
+        if isinstance(other, Lictionary):
+            return self._items <= other._items
+        else:
+            return self._items <= other
+
+    def __lt__(self, other):
+        if isinstance(other, Lictionary):
+            return self._items < other._items
+        else:
+            return self._items < other
+
+    def __ne__(self, other):
+        if isinstance(other, Lictionary):
+            return self._items != other._items
+        else:
+            return self._items != other
+
