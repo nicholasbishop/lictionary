@@ -3,9 +3,9 @@ import collections
 class Lictionary(collections.MutableMapping, collections.MutableSequence):
     __slots__ = ('_items',)
 
-    def __init__(self, items=None):
+    def __init__(self, *args):
         super(Lictionary, self).__init__()
-        self._items = items or []
+        self._items = list(args)
 
     def as_list(self):
         return self._items
