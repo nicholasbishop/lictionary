@@ -17,10 +17,9 @@ class Lictionary(object):
         else:
             # TODO(nicholasbishop): simple implementation for now, not
             # efficient for large number of items
-            for item in reversed(self._items):
-                if (isinstance(item, tuple) and len(item) == 2 and
-                    item[0] == key):
-                    return item[1]
+            for ele in reversed(self._items):
+                if isinstance(ele, tuple) and len(ele) == 2 and ele[0] == key:
+                    return ele[1]
             raise KeyError('not found')
 
     def get(self, key, default=None):
