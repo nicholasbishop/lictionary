@@ -33,3 +33,9 @@ class TestLictionary(unittest.TestCase):
             _ = lict[0]
         with self.assertRaises(KeyError):
             _ = lict['key']
+
+    def test_equal(self):
+        self.assertEqual(Lictionary(), Lictionary())
+        self.assertEqual(Lictionary(), [])
+        self.assertEqual(Lictionary(1, 2, 3), Lictionary(1, 2, 3))
+        self.assertEqual(Lictionary(1, 2, 3), [1, 2, 3])
