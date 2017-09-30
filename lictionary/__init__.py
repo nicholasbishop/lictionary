@@ -1,10 +1,29 @@
+"""Provides the Lictionary class"""
+
+# pylint: disable=fixme
+
 import collections
 
+def _unwrap(obj):
+    # pylint: disable=protected-access
+    if isinstance(obj, Lictionary):
+        return obj._items
+    return obj
+
+
 class Lictionary(collections.MutableMapping, collections.MutableSequence):
+    """Combined list + dictionary data type."""
+
     __slots__ = ('_items',)
 
     def __init__(self, *args):
-        super(Lictionary, self).__init__()
+        # TODO(nicholasbishop): pylint 1.7.4 complains if the call to
+        # the parent class's init is missing, but also complains if
+        # present. Even weirder, the behavior is non-deterministic!
+        # Repeatedly running pylint usually emits the error, but
+        # occasionally it doesn't. Maybe due to an unordered dict
+        # somewhere...
+        super(Lictionary, self).__init__()  # pylint: disable=no-member
         self._items = list(args)
 
     def __delitem__(self, key):
@@ -34,43 +53,26 @@ class Lictionary(collections.MutableMapping, collections.MutableSequence):
         return len(self._items)
 
     def __eq__(self, other):
-        if isinstance(other, Lictionary):
-            return self._items == other._items
-        else:
-            return self._items == other
+        return self._items == _unwrap(other)
 
     def __ge__(self, other):
-        if isinstance(other, Lictionary):
-            return self._items >= other._items
-        else:
-            return self._items >= other
+        return self._items >= _unwrap(other)
 
     def __gt__(self, other):
-        if isinstance(other, Lictionary):
-            return self._items > other._items
-        else:
-            return self._items > other
+        return self._items > _unwrap(other)
 
     def __le__(self, other):
-        if isinstance(other, Lictionary):
-            return self._items <= other._items
-        else:
-            return self._items <= other
+        return self._items < _unwrap(other)
 
     def __lt__(self, other):
-        if isinstance(other, Lictionary):
-            return self._items < other._items
-        else:
-            return self._items < other
+        return self._items <= _unwrap(other)
 
     def __ne__(self, other):
-        if isinstance(other, Lictionary):
-            return self._items != other._items
-        else:
-            return self._items != other
+        return self._items != _unwrap(other)
 
     def as_list(self):
-        return self._items
+        """Shallow copy of the items in this lictionary."""
+        return list(self._items)
 
     def get(self, key, default=None):
         try:
@@ -80,4 +82,3 @@ class Lictionary(collections.MutableMapping, collections.MutableSequence):
 
     def insert(self, index, item):
         self._items.insert(index, item)
-
