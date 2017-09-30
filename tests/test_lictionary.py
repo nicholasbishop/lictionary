@@ -30,6 +30,6 @@ class TestLictionary(unittest.TestCase):
         self.assertIs(lict.get(0), None)
         self.assertIs(lict.get('key'), None)
         with self.assertRaises(IndexError):
-            lict[0]
+            _ = lict[0]
         with self.assertRaises(KeyError):
-            lict['key']
+            _ = lict['key']
