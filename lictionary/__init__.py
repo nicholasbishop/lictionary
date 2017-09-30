@@ -1,16 +1,15 @@
 import collections
 
-class Lictionary(collections.MutableSequence):
+class Lictionary(collections.MutableMapping, collections.MutableSequence):
     __slots__ = ('_items',)
 
     def __init__(self, items=None):
         super(Lictionary, self).__init__()
         self._items = items or []
 
-    @property
-    def items(self):
+    def as_list(self):
         return self._items
-    
+
     def insert(self, index, item):
         self._items.insert(index, item)
 
@@ -36,6 +35,9 @@ class Lictionary(collections.MutableSequence):
 
     def __len__(self):
         return len(self._items)
+
+    def __iter__(self):
+        return self._items.__iter__()
 
     def get(self, key, default=None):
         try:
