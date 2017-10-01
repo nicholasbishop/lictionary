@@ -70,6 +70,10 @@ class Lictionary(collections.MutableMapping, collections.MutableSequence):
     def __ne__(self, other):
         return self._items != _unwrap(other)
 
+    def __repr__(self):
+        contents = (repr(item) for item in self._items)
+        return '{}({})'.format(self.__class__.__name__, ', '.join(contents))
+
     def as_list(self):
         """Shallow copy of the items in this lictionary."""
         return list(self._items)

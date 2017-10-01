@@ -41,3 +41,7 @@ class TestLictionary(unittest.TestCase):
         self.assertEqual(Lictionary(), [])
         self.assertEqual(Lictionary(1, 2, 3), Lictionary(1, 2, 3))
         self.assertEqual(Lictionary(1, 2, 3), [1, 2, 3])
+
+    def test_repr(self):
+        self.assertEqual(repr(Lictionary()), 'Lictionary()')
+        self.assertEqual(repr(Lictionary(1, 2)), 'Lictionary(1, 2)')
